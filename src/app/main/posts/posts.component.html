@@ -1,0 +1,30 @@
+<div class="card post">
+    <div class="card-body">
+        <button class="btn btn-sm btn-outline-primary edit-button" (click)="editPost(post.id)">Edit</button>
+        <h3 class="card-title">{{ post?.title }}</h3>
+        <p class="card-subtitle mb-2 text-muted">By {{post?.authorName}}</p>
+        <small class="text-muted">{{ post?.timestamp | date:'MMM d, y' }}</small>
+        <p class="card-text mt-3">{{ post?.body }}</p>
+        <img *ngIf="post?.image" [src]="post.image" alt="Post Image" class="img-fluid"> <!-- img-fluid to ensure the image scales appropriately -->
+
+        <button *ngIf="post?.comments?.length > 0" class="btn btn-sm btn-outline-info mt-3" (click)="showComment = !showComment">
+            {{ showComment ? 'Hide Comments' : 'Show Comments' }}
+        </button>
+      
+        <div *ngIf="showComment" class="mt-3 comment-section">
+            <h4 class="text-muted">Comments:</h4>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngFor="let comment of post?.comments" style="background-color: #f5f5f5;">{{ comment }}</li>
+            </ul>
+        </div>
+              
+        <div class="comment mt-4">
+            <div class="input-group mb-3">
+                <input type="text" [(ngModel)]="post.comment" placeholder="Add a comment..." class="form-control">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" (click)="submitComment(post.id, post.comment)">Comment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

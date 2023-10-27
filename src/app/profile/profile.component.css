@@ -1,0 +1,14 @@
+.error-message {
+    color: red;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus,
+form input[type="password"]:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+button:hover {
+    background-color: #0056b3;
+}

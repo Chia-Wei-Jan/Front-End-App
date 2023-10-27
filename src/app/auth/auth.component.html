@@ -1,0 +1,79 @@
+<div class="container landing-container mt-5">
+  <div class="ricebook-branding brand-font" >
+    Ricebook 
+  </div>
+  <div class="row">
+  
+    <!-- Login Form -->
+    <div class="col-md-6">
+      <div class="card login-container">
+        <div class="card-body">
+          <h2 class="card-title">Login</h2>
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Username" formControlName="username">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" placeholder="Password" formControlName="password">
+            </div>
+            <div *ngIf="loginError" class="error-message mb-3">{{ loginError }}</div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Registration Form -->
+    <div class="col-md-6">
+      <div class="card register-container">
+        <div class="card-body">
+          <h2 class="card-title">Register</h2>
+          <form [formGroup]="registerForm" (ngSubmit)="register()">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Name" formControlName="name">
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Username" formControlName="username">
+              <div *ngIf="usernameError" class="error-message mt-2">{{ usernameError }}</div>
+            </div>
+            <div class="form-group">
+              <input type="email" class="form-control" placeholder="Email" formControlName="email">
+              <div *ngIf="registerForm.controls['email'].touched && registerForm.controls['email'].hasError('invalidEmail')" class="error-message mt-2">
+                Please enter a valid email format
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Phone (123-456-7890)" formControlName="phone">
+              <div *ngIf="registerForm.controls['phone'].touched && registerForm.controls['phone'].hasError('invalidPhone')" class="error-message mt-2">
+                Please enter XXX-XXX-XXXX format
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="date" class="form-control" placeholder="Date of Birth" formControlName="dateOfBirth">
+              <div class="error-message mt-2">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Zipcode (12345)" formControlName="zipcode">
+              <div *ngIf="registerForm.controls['zipcode'].touched && registerForm.controls['zipcode'].hasError('invalidZipcode')" class="error-message mt-2">
+                Please enter a 5-digit number
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" placeholder="Password" formControlName="password">
+            </div>
+            <div class="form-group">
+              <input type="password" class="form-control" placeholder="Confirm Password" formControlName="confirmPassword">
+              <div *ngIf="registerForm.controls['confirmPassword'].touched && registerForm.hasError('mismatchedPasswords')" class="error-message mt-2">
+                Passwords do not match
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

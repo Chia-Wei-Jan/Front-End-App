@@ -1,0 +1,103 @@
+<div class="container mt-5">
+
+  <!-- Top Navigation -->
+  <div class="row mb-4 d-flex justify-content-between">
+    <div class="col-auto">
+      <button class="btn btn-primary" (click)="viewProfile()">Profile</button>
+    </div>
+    <div class="col-auto">
+      <button class="btn btn-danger" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <!-- Header -->
+    <div class="col-12 text-center mb-4">
+      <div class="user-info mb-3">
+        <img [src]="avatarUrl" alt="User Avatar" class="avatar rounded-circle" width="100">
+        <h2>Welcome, {{ username }}!</h2>
+        <h3>{{ headline }}</h3>
+      </div>
+
+      <div class="input-group mb-3 edit-headline">
+        <input [(ngModel)]="newHeadline" placeholder="Update Status..." class="form-control">
+        <div class="input-group-append">
+          <button class="btn btn-outline-secondary" (click)="updateHeadline()">Update</button>
+        </div>
+      </div>
+      
+      <div class="input-group mb-3 search-bar">
+        <input [(ngModel)]="searchKeyword" (keyup)="searchPost()" placeholder="Search..." class="form-control">
+        <div class="input-group-append">
+          <span class="input-group-text"><i class="fas fa-search"></i></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="col-md-8 mb-4">
+
+      <!-- New Post -->
+      <div class="card new-post mb-4">
+        <div class="card-body">
+          <h3 class="card-title">Create a New Post</h3>
+          <input [(ngModel)]="newPostTitle" placeholder="Post Title" class="form-control mb-3">
+          <textarea [(ngModel)]="newPostContent" row="5" placeholder="Type your post..." class="form-control mb-3"></textarea>
+          <input type="file" #inputImage (change)="uploadImage($event)" class="d-none">
+          <button class="btn btn-sm btn-info mb-2" (click)=" uploadImageBtn(); inputImage.click()">Upload Image</button>
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-primary" (click)="submitPost()">Post</button>
+            <button class="btn btn-secondary" (click)="clearPost()">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Posts -->
+      <ng-container *ngIf="!newUser">
+        <div *ngFor="let post of filterPost" class="post-list mb-3">
+            <app-post [post]="post"></app-post>
+        </div>
+    </ng-container>
+
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-md-4">
+
+      <!-- Add Follower Section -->
+      <div class="card mb-3">
+        <div class="card-header text-center">
+          Add Follower
+        </div>
+        <div class="card-body text-center">
+          <input [(ngModel)]="newFollowerName" placeholder="User" class="form-control mb-2">
+          <div *ngIf="addFollowerErrorMessage" style="color: red;">
+            {{ addFollowerErrorMessage }}
+          </div>
+          <button class="btn btn-sm btn-primary" (click)="addFollower()">Follow</button>
+        </div>
+      </div>
+
+      <!-- Followed Users -->
+      <div class="card">
+        <div class="card-header text-center">
+          Followed Users
+        </div>
+        <ul class="list-group list-group-flush">
+          <ng-container *ngIf="!newUser">
+            <li *ngFor="let user of followedUsers; let i = index" class="list-group-item text-center">
+              <img [src]="user.avatar" class="rounded-circle mb-2" width="50">
+              <h4>{{ user.username }}</h4>
+              <p>{{ user.headline }}</p>
+              <button class="btn btn-sm btn-outline-danger" (click)="unfollowUser(i)">Unfollow</button>
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

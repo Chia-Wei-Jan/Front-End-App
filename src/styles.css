@@ -1,0 +1,47 @@
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #ecf0f1;
+    color: #333;  
+}
+
+.container {
+    background-color: white;  
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.card {
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    background-color: #3498db;
+    border: none;
+}
+
+.btn-secondary {
+    background-color: #95a5a6;
+    border: none;
+}
+
+.btn-success {
+    background-color: #2ecc71;
+    border: none;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.brand-font {
+    font-family: 'Roboto', sans-serif; 
+    font-weight: bold;
+    color: #3498db; 
+}
+
